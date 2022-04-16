@@ -1,0 +1,679 @@
+type OpportunityProvider @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  displayName: String
+  companyNo: String!
+  parent: String
+  email: String!
+  educationalInstitution: Boolean!
+  status: Int!
+  logo: S3Object
+  tagline: String
+  address: String
+  phone: String
+  website: String
+  primarySector: OpportunityProviderSector @connection
+  otherSectors: [OpportunityProviderOtherSector]
+    @connection(keyName: "byOpportunityProviderId", fields: ["id"])
+  followers: [OpportunityProviderFollower]
+    @connection(keyName: "byOpportunityProviderId", fields: ["id"])
+  contents: [Content] @connection(keyName: "byProvider", fields: ["id"])
+  opportunities: [Opportunity]
+    @connection(name: "OpportunityProviderOpportunities")
+  opportunityTypes: [OpportunityProviderOpportunityType]
+    @connection(keyName: "byOpportunityProviderId", fields: ["id"])
+  users: [OpportunityProviderUser] @connection(name: "OpportunityProviderUsers")
+}
+
+type OpportunityProviderFollower
+  @model(subscriptions: null)
+  @key(
+    name: "byOpportunityProviderId"
+    fields: ["opportunityProviderId", "seekerId"]
+  )
+  @key(name: "bySeekerId", fields: ["seekerId", "opportunityProviderId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  status: Int!
+  startedAt: AWSDateTime!
+  opportunityProviderId: ID!
+  seekerId: ID!
+  opportunityProvider: OpportunityProvider!
+    @connection(fields: ["opportunityProviderId"])
+  seeker: Seeker! @connection(fields: ["seekerId"])
+}
+
+type OpportunityProviderSector
+  @model(subscriptions: null)
+  @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  status: Int!
+  opportunityProviders: [OpportunityProviderOtherSector]
+    @connection(keyName: "bySectorId", fields: ["id"])
+}
+
+type OpportunityProviderOtherSector
+  @model(queries: null, subscriptions: null)
+  @key(
+    name: "byOpportunityProviderId"
+    fields: ["opportunityProviderId", "sectorId"]
+  )
+  @key(name: "bySectorId", fields: ["sectorId", "opportunityProviderId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  opportunityProviderId: ID!
+  sectorId: ID!
+  opportunityProvider: OpportunityProvider!
+    @connection(fields: ["opportunityProviderId"])
+  sector: OpportunityProviderSector! @connection(fields: ["sectorId"])
+}
+
+type OpportunityProviderOpportunityType
+  @model(queries: null, subscriptions: null)
+  @key(
+    name: "byOpportunityProviderId"
+    fields: ["opportunityProviderId", "opportunityTypeId"]
+  )
+  @aws_cognito_user_pools {
+  id: ID!
+  opportunityProviderId: ID!
+  opportunityTypeId: ID!
+  opportunityProvider: OpportunityProvider!
+    @connection(fields: ["opportunityProviderId"])
+  opportunityType: OpportunityType! @connection(fields: ["opportunityTypeId"])
+}
+
+type OpportunityProviderUser
+  @model(subscriptions: null)
+  @auth(rules: [{ allow: private, provider: userPools }])
+  @aws_cognito_user_pools {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  status: Int!
+  opportunityProvider: OpportunityProvider!
+    @connection(name: "OpportunityProviderUsers")
+  opportunityProviderUserOpportunityProviderId: ID!
+}
+
+type Opportunity @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  title: String!
+  location: String
+  date: AWSDateTime
+  description: String!
+  caption: String
+  capacity: Int
+  status: Int!
+  cover: S3Object
+  applicationRequired: Boolean!
+  applicationDeadline: AWSDateTime
+  opportunityType: OpportunityType! @connection
+  opportunityCreatedSteps: [OpportunityStep]
+    @connection(name: "OpportunitySteps")
+  organiser: OpportunityProviderUser! @connection
+  opportunityProvider: OpportunityProvider!
+    @connection(name: "OpportunityProviderOpportunities")
+  opportunityOpportunityProviderId: ID!
+  attendees: [OpportunityAttendee]
+    @connection(keyName: "byOpportunityId", fields: ["id"])
+  likes: [ResourceReaction] @connection(keyName: "byOpportunity", fields:["id"])
+}
+
+type OpportunityType @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  status: Int!
+}
+
+type OpportunityAttendee
+  @model(queries: null, subscriptions: null)
+  @key(name: "byOpportunityId", fields: ["opportunityId", "seekerId"])
+  @key(name: "bySeekerId", fields: ["seekerId", "opportunityId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  status: Int!
+  seekerComment: String
+  opportunityId: ID!
+  seekerId: ID!
+  opportunity: Opportunity! @connection(fields: ["opportunityId"])
+  seeker: Seeker! @connection(fields: ["seekerId"])
+  opportunityProvider: OpportunityProvider! @connection
+}
+
+enum OpportunityAttendeeStatus {
+  APPLIED
+  INVITED
+  REGISTERED
+  UNREGISTERED
+}
+
+type OpportunityStep @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  opportunity: Opportunity! @connection(name: "OpportunitySteps")
+  opportunityStepOpportunityId: ID!
+  seeker: Seeker! @connection
+}
+
+type Seeker @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  username: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  status: Int!
+  mobileNumber: String
+  postcodeArea: String
+  dateOfBirth: String
+  biography: String
+  profilePic: S3Object
+  routeMaps: [RouteMap] @connection(name: "SeekerRouteMaps")
+  opportunityProviders: [OpportunityProviderFollower]
+    @connection(keyName: "bySeekerId", fields: ["id"])
+  opportunities: [OpportunityAttendee]
+    @connection(keyName: "bySeekerId", fields: ["id"])
+  posts: [Post] @connection(name: "SeekerPosts")
+  interests: [String]
+  admireBrands: [String]
+  profileCompleted: Boolean
+  visibleToProviders: Boolean
+  visibleToSeekers: Boolean
+  friends: [Friendship] @connection(keyName: "bySeekerId", fields: ["id"])
+  friendRequests: [FriendshipRequest]
+    @connection(keyName: "byRecipientId", fields: ["id"])
+  collaborations: [Collaboration] @connection(name: "SeekerCollaborations")
+  collaborationMembers: [CollaborationMember]
+    @connection(keyName: "bySeekerId", fields: ["id"])
+  conversationMembers: [ConversationMember]
+    @connection(keyName: "bySeekerId", fields: ["id"])
+}
+
+type RouteMap @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  visibility: Int!
+  status: Int!
+  coverPhoto: S3Object!
+  destination: String!
+  category: RouteMapCategory! @connection
+  owner: Seeker! @connection(name: "SeekerRouteMaps")
+  focusAreas: [String]
+  posts: [Post] @connection(name: "RouteMapPosts")
+}
+
+type RouteMapCategory @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  iconName: String
+  bgColor: String
+  status: Int!
+}
+
+type RouteMapDestination @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  status: Int!
+}
+
+type Post @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  type: PostType!
+  caption: String!
+  status: Int!
+  visibility: Int!
+  blog: BlogPost
+  photo: [S3Object]
+  video: S3Object
+  videoThumbnail: S3Object
+  milestone: MilestonePost
+  createdAt: String!
+  routeMap: RouteMap @connection(name: "RouteMapPosts")
+  opportunity: Opportunity
+  tags: [PostTag]
+  seeker: Seeker! @connection(name: "SeekerPosts")
+  likes: [ResourceReaction] @connection(keyName: "byPost", fields:["id"])
+}
+
+enum PostType {
+  BLOG
+  PHOTO
+  VIDEO
+  MILESTONE
+}
+
+type PostTag @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  tag: String!
+  link: String!
+  posts: [Post]
+}
+
+type ResourceReaction 
+  @model(subscriptions:null, 
+  queries: null, 
+  mutations: {create: "likeResource", delete: "unlikeResource"})
+  @key(name: "byPost", fields: ["postId"])
+  @key(name: "byContent", fields: ["contentId"])
+  @key(name: "byCollaboration", fields: ["collaborationId"])
+  @key(name: "byOpportunity", fields: ["opportunityId"])
+  @aws_cognito_user_pools{
+    id: ID!
+    postId: ID
+    contentId: ID
+    collaborationId: ID
+    opportunityId: ID
+    seekerId: ID!
+    seeker: Seeker! @connection(fields: ["seekerId"])
+}
+
+type OpsNotInApp
+  @model(
+    queries: { get: "getOpsNotInApp", list: "listOpsNotInApps" }
+    mutations: { create: "createOpsNotInApp", update: "updateOpsNotInApp" }
+    subscriptions: null
+  )
+  @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  interested: String!
+  status: Int!
+}
+
+type Report
+  @model(
+    queries: { get: "getReport", list: "listReports" }
+    mutations: { create: "createReport", update: "updateReport" }
+    subscriptions: null
+  )
+  @aws_cognito_user_pools {
+  id: ID!
+  dateTime: String!
+  from: String!
+  details: String!
+  typeId: Int!
+  type: String!
+  about: String!
+  status: Int!
+}
+
+type SpecialProject @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  opportunityProviderId: ID!
+  opportunityProviderUserId: ID!
+  contactName: String!
+  email: String!
+  telephoneNumber: String!
+  mobileNumber: String
+  employeeCount: String
+  projectSummary: String!
+  status: Int!
+  primarySectorId: ID!
+  primarySector: OpportunityProviderSector!
+    @connection(fields: ["primarySectorId"])
+  createdBy: OpportunityProviderUser!
+    @connection(fields: ["opportunityProviderUserId"])
+  opportunityProvider: OpportunityProvider!
+    @connection(fields: ["opportunityProviderId"])
+}
+
+type S3Object @aws_cognito_user_pools {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+type Content
+  @model(subscriptions: null)
+  @key(name: "byProvider", fields: ["opportunityProviderId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  title: String!
+  caption: String
+  description: String
+  type: String!
+  positiveFeedbacks: [ContentPositiveFeedback]
+    @connection(keyName: "byContentId", fields: ["id"])
+  blog: BlogPost
+  photo: S3Object
+  video: String
+  status: Int!
+  opportunityProviderId: ID!
+  opportunityProviderUserId: ID!
+  createdBy: OpportunityProviderUser!
+    @connection(fields: ["opportunityProviderUserId"])
+  opportunityProvider: OpportunityProvider!
+    @connection(fields: ["opportunityProviderId"])
+  likes: [ResourceReaction] @connection(keyName: "byContent", fields:["id"])
+}
+
+type ContentPositiveFeedback
+  @model(queries: null, subscriptions: null)
+  @key(name: "byContentId", fields: ["contentId", "seekerId"])
+  @key(name: "bySeekerId", fields: ["seekerId", "contentId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  addedAt: AWSDateTime!
+  contentId: ID!
+  seekerId: ID!
+  content: Content! @connection(fields: ["contentId"])
+  seeker: Seeker! @connection(fields: ["seekerId"])
+}
+
+type BlogPost @aws_cognito_user_pools {
+  blogTitle: String!
+  blogDescription: String!
+  blogBody: String
+  blogCoverPhoto: S3Object
+  visibility: String!
+}
+
+type MilestonePost @aws_cognito_user_pools {
+  title: String!
+  date: String!
+}
+
+type Friendship
+  @model(queries: null, subscriptions: null)
+  @key(name: "byFriendId", fields: ["friendId", "seekerId"])
+  @key(name: "bySeekerId", fields: ["seekerId", "friendId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  status: Int!
+  friendId: ID!
+  seekerId: ID!
+  friend: Seeker! @connection(fields: ["friendId"])
+  seeker: Seeker! @connection(fields: ["seekerId"])
+}
+
+type FriendshipRequest
+  @model(subscriptions: null)
+  @key(name: "byRecipientId", fields: ["recipientId", "requesterId"])
+  @key(name: "byRequesterId", fields: ["requesterId", "recipientId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  status: Int!
+  recipientId: ID!
+  requesterId: ID!
+  recipient: Seeker! @connection(fields: ["recipientId"])
+  requester: Seeker! @connection(fields: ["requesterId"])
+}
+
+type Notification @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  message: String!
+  date: String!
+  type: String!
+}
+
+type Collaboration @model(subscriptions: null) @aws_cognito_user_pools {
+  id: ID!
+  title: String!
+  location: String
+  startDate: String!
+  endDate: String
+  description: String!
+  caption: String
+  capacity: Int!
+  status: Int!
+  cover: S3Object
+  coverThumb: S3Object
+  inviteOnly: Boolean!
+  owner: Seeker! @connection(name: "SeekerCollaborations")
+  members: [CollaborationMember]
+    @connection(keyName: "byCollaborationId", fields: ["id"])
+  likes: [ResourceReaction] @connection(keyName: "byCollaboration", fields:["id"])
+}
+
+type CollaborationMember
+  @model(queries: null, subscriptions: null)
+  @key(name: "byCollaborationId", fields: ["collaborationId", "seekerId"])
+  @key(name: "bySeekerId", fields: ["seekerId", "collaborationId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  status: Int!
+  comment: String
+  collaborationId: ID!
+  seekerId: ID!
+  collaboration: Collaboration! @connection(fields: ["collaborationId"])
+  seeker: Seeker! @connection(fields: ["seekerId"])
+}
+
+type Message
+  @model
+  @key(
+    name: "byConversationId"
+    fields: ["conversationId", "createdAt"]
+    queryField: "messagesByConversationId"
+  )
+  @aws_cognito_user_pools {
+  id: ID!
+  conversationId: ID!
+  author: String!
+  body: String!
+  content: String!
+  seekerId: ID!
+  type: MessageType!
+  seeker: Seeker! @connection(fields: ["seekerId"])
+  conversation: Conversation! @connection(fields: ["conversationId"])
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VIDEO
+  POST
+  COLLABORATION
+  OPPORTUNITY
+}
+
+type Conversation @model @aws_cognito_user_pools {
+  id: ID!
+  type: ConversationType!
+  title: String!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  members: [ConversationMember]
+    @connection(keyName: "byConversationId", fields: ["id"])
+  messages: [Message] @connection(keyName: "byConversationId", fields: ["id"])
+}
+
+type ConversationMember
+  @model(queries: null, subscriptions: null)
+  @key(name: "byConversationId", fields: ["conversationId", "seekerId"])
+  @key(name: "bySeekerId", fields: ["seekerId", "conversationId"])
+  @aws_cognito_user_pools {
+  id: ID!
+  status: Int!
+  comment: String
+  conversationId: ID!
+  seekerId: ID!
+  conversation: Conversation! @connection(fields: ["conversationId"])
+  seeker: Seeker! @connection(fields: ["seekerId"])
+}
+
+enum ConversationType {
+  CONNECTIONS
+  GROUP
+  PROVIDER
+}
+
+type ModelOpportunityConnection @aws_cognito_user_pools {
+  items: [Opportunity]
+  nextToken: String
+}
+
+type ModelOpportunityProviderConnection @aws_cognito_user_pools {
+  items: [OpportunityProvider]
+  nextToken: String
+}
+
+type ModelOpportunityProviderUserConnection @aws_cognito_user_pools {
+  items: [OpportunityProviderUser]
+  nextToken: String
+}
+
+type ModelSeekerConnection @aws_cognito_user_pools {
+  items: [Seeker]
+  nextToken: String
+}
+
+type ModelOpportunityStepConnection @aws_cognito_user_pools {
+  items: [OpportunityStep]
+  nextToken: String
+}
+
+type ModelOpportunityTypeConnection @aws_cognito_user_pools {
+  items: [OpportunityType]
+  nextToken: String
+}
+
+type ModelOpportunityProviderSectorConnection @aws_cognito_user_pools {
+  items: [OpportunityProviderSector]
+  nextToken: String
+}
+
+type ModelOpportunityProviderOtherSectorConnection @aws_cognito_user_pools {
+  items: [OpportunityProviderOtherSector]
+  nextToken: String
+}
+
+type ModelOpportunityAttendeeConnection @aws_cognito_user_pools {
+  items: [OpportunityAttendee]
+  nextToken: String
+}
+
+type ModelOpportunityProviderFollowerConnection @aws_cognito_user_pools {
+  items: [OpportunityProviderFollower]
+  nextToken: String
+}
+
+type ModelRouteMapConnection @aws_cognito_user_pools {
+  items: [RouteMap]
+  nextToken: String
+}
+
+type ModelRouteMapCategoryConnection @aws_cognito_user_pools {
+  items: [RouteMapCategory]
+  nextToken: String
+}
+
+type ModelRouteMapDestinationConnection @aws_cognito_user_pools {
+  items: [RouteMapDestination]
+  nextToken: String
+}
+
+type ModelOpportunityProviderOpportunityTypeConnection @aws_cognito_user_pools {
+  items: [OpportunityProviderOpportunityType]
+  nextToken: String
+}
+
+type ModelReportConnection @aws_cognito_user_pools {
+  items: [Report]
+  nextToken: String
+}
+
+type ModelOpsNotInAppConnection @aws_cognito_user_pools {
+  items: [OpsNotInApp]
+  nextToken: String
+}
+
+type ModelSpecialProjectConnection @aws_cognito_user_pools {
+  items: [SpecialProject]
+  nextToken: String
+}
+
+type ModelContentPositiveFeedbackConnection @aws_cognito_user_pools {
+  items: [ContentPositiveFeedback]
+  nextToken: String
+}
+
+type ModelBlogPostConnection @aws_cognito_user_pools {
+  items: [BlogPost]
+  nextToken: String
+}
+
+type ModelMilestonePostConnection @aws_cognito_user_pools {
+  items: [MilestonePost]
+  nextToken: String
+}
+
+type ModelPostConnection @aws_cognito_user_pools {
+  items: [Post]
+  nextToken: String
+}
+
+type ModelPostTagConnection @aws_cognito_user_pools {
+  items: [PostTag]
+  nextToken: String
+}
+
+type ModelContentConnection @aws_cognito_user_pools {
+  items: [Content]
+  nextToken: String
+}
+
+type ModelFriendshipConnection @aws_cognito_user_pools {
+  items: [Friendship]
+  nextToken: String
+}
+
+type ModelFriendshipRequestConnection @aws_cognito_user_pools {
+  items: [FriendshipRequest]
+  nextToken: String
+}
+
+type ModelNotificationConnection @aws_cognito_user_pools {
+  items: [Notification]
+  nextToken: String
+}
+
+type ModelCollaborationConnection @aws_cognito_user_pools {
+  items: [Collaboration]
+  nextToken: String
+}
+
+type ModelCollaborationMemberConnection @aws_cognito_user_pools {
+  items: [CollaborationMember]
+  nextToken: String
+}
+
+type ModelMessageConnection @aws_cognito_user_pools {
+  items: [Message]
+  nextToken: String
+}
+
+type ModelConversationConnection @aws_cognito_user_pools {
+  items: [Conversation]
+  nextToken: String
+}
+
+type ModelConversationMemberConnection @aws_cognito_user_pools {
+  items: [ConversationMember]
+  nextToken: String
+}
+
+input CreateOpportunityProviderOpportunityTypeInput {
+  id: ID
+  opportunityProviderId: ID!
+  opportunityTypeId: ID!
+}
+
+type Mutation @aws_cognito_user_pools {
+  processOpportunityType(
+    input: CreateOpportunityProviderOpportunityTypeInput!
+  ): OpportunityType
+}
+
+type Query @aws_cognito_user_pools {
+  bringOpportunity(id: ID!): Opportunity
+}
+
+type Subscription @aws_cognito_user_pools {
+  onCreateMessageByConversationId(conversationId: ID!): Message
+    @aws_subscribe(mutations: ["createMessage"])
+  onCreateConversationMemberBySeekerId(seekerId: ID!): ConversationMember
+    @aws_subscribe(mutations: ["createConversationMember"])
+}

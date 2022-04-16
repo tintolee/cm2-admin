@@ -1,0 +1,130 @@
+{
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cm2admin-develop-232220-authRole",
+      "UnauthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-develop-232220-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-develop-232220-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cm2admin-develop-232220-deployment",
+      "UnauthRoleName": "amplify-cm2admin-develop-232220-unauthRole",
+      "StackName": "amplify-cm2admin-develop-232220",
+      "StackId": "arn:aws:cloudformation:eu-west-1:712691200111:stack/amplify-cm2admin-develop-232220/61ad9cc0-52b8-11eb-a4b0-023705b58935",
+      "AmplifyAppId": "d1x7vqge542292"
+    },
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      },
+      "hosting": {}
+    }
+  },
+  "erkan": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cm2admin-erkan-164610-authRole",
+      "UnauthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-erkan-164610-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-erkan-164610-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cm2admin-erkan-164610-deployment",
+      "UnauthRoleName": "amplify-cm2admin-erkan-164610-unauthRole",
+      "StackName": "amplify-cm2admin-erkan-164610",
+      "StackId": "arn:aws:cloudformation:eu-west-1:712691200111:stack/amplify-cm2admin-erkan-164610/04ff22d0-4d1a-11eb-a958-0a23af1c9dca",
+      "AmplifyAppId": "d1x7vqge542292"
+    },
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      }
+    }
+  },
+  "lakini": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cm2admin-lakini-174243-authRole",
+      "UnauthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-lakini-174243-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-lakini-174243-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cm2admin-lakini-174243-deployment",
+      "UnauthRoleName": "amplify-cm2admin-lakini-174243-unauthRole",
+      "StackName": "amplify-cm2admin-lakini-174243",
+      "StackId": "arn:aws:cloudformation:eu-west-1:712691200111:stack/amplify-cm2admin-lakini-174243/eb971a20-4d21-11eb-a5e2-06300095c765",
+      "AmplifyAppId": "d1x7vqge542292"
+    },
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      },
+      "hosting": {}
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cm2admin-dev-225112-authRole",
+      "UnauthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-dev-225112-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-dev-225112-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cm2admin-dev-225112-deployment",
+      "UnauthRoleName": "amplify-cm2admin-dev-225112-unauthRole",
+      "StackName": "amplify-cm2admin-dev-225112",
+      "StackId": "arn:aws:cloudformation:eu-west-1:712691200111:stack/amplify-cm2admin-dev-225112/083d7b50-52b4-11eb-985a-06bd014b51b5",
+      "AmplifyAppId": "d1x7vqge542292"
+    },
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      }
+    }
+  },
+  "test": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cm2admin-test-110323-authRole",
+      "UnauthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-test-110323-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-test-110323-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cm2admin-test-110323-deployment",
+      "UnauthRoleName": "amplify-cm2admin-test-110323-unauthRole",
+      "StackName": "amplify-cm2admin-test-110323",
+      "StackId": "arn:aws:cloudformation:eu-west-1:712691200111:stack/amplify-cm2admin-test-110323/514d5610-531a-11eb-a5f3-0aa19f5e26ca",
+      "AmplifyAppId": "d1x7vqge542292"
+    },
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      }
+    }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cm2admin-prod-112329-authRole",
+      "UnauthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-prod-112329-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-prod-112329-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cm2admin-prod-112329-deployment",
+      "UnauthRoleName": "amplify-cm2admin-prod-112329-unauthRole",
+      "StackName": "amplify-cm2admin-prod-112329",
+      "StackId": "arn:aws:cloudformation:eu-west-1:712691200111:stack/amplify-cm2admin-prod-112329/1fc87540-531d-11eb-9f25-06004953cadb",
+      "AmplifyAppId": "d1x7vqge542292"
+    },
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      }
+    }
+  },
+  "esoft": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cm2admin-esoft-185451-authRole",
+      "UnauthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-esoft-185451-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-esoft-185451-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cm2admin-esoft-185451-deployment",
+      "UnauthRoleName": "amplify-cm2admin-esoft-185451-unauthRole",
+      "StackName": "amplify-cm2admin-esoft-185451",
+      "StackId": "arn:aws:cloudformation:eu-west-1:712691200111:stack/amplify-cm2admin-esoft-185451/63dbeb90-89d1-11ec-8932-0aabd38196ef",
+      "AmplifyAppId": "d1x7vqge542292"
+    },
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      }
+    }
+  }
+}

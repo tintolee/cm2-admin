@@ -1,0 +1,10 @@
+{
+  "features": {
+    "graphqltransformer": {
+      "addmissingownerfields": true
+    },
+    "project": {
+      "overrides": true
+    }
+  }
+}
