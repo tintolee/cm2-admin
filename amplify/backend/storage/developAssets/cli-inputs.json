@@ -1,0 +1,14 @@
+{
+  "resourceName": "developAssets",
+  "policyUUID": "dd4b4713",
+  "bucketName": "cm2admin76c0204e67c04debbd17e2f6952f1473",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger25ae337c",
+  "groupAccess": {}
+}
