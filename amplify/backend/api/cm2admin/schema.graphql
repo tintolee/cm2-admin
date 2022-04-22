@@ -7,7 +7,7 @@ type OpportunityProvider @model(subscriptions: null) @aws_cognito_user_pools {
   email: String!
   educationalInstitution: Boolean!
   status: Int!
-  logo: S3Object
+  logo: String
   tagline: String
   address: String
   phone: String
@@ -107,7 +107,7 @@ type Opportunity @model(subscriptions: null) @aws_cognito_user_pools {
   caption: String
   capacity: Int
   status: Int!
-  cover: S3Object
+  cover: String
   applicationRequired: Boolean!
   applicationDeadline: AWSDateTime
   opportunityType: OpportunityType! @connection
@@ -168,7 +168,7 @@ type Seeker @model(subscriptions: null) @aws_cognito_user_pools {
   postcodeArea: String
   dateOfBirth: String
   biography: String
-  profilePic: S3Object
+  profilePic: String
   routeMaps: [RouteMap] @connection(name: "SeekerRouteMaps")
   opportunityProviders: [OpportunityProviderFollower]
     @connection(keyName: "bySeekerId", fields: ["id"])
@@ -194,7 +194,7 @@ type RouteMap @model(subscriptions: null) @aws_cognito_user_pools {
   id: ID!
   visibility: Int!
   status: Int!
-  coverPhoto: S3Object!
+  coverPhoto: String!
   destination: String!
   category: RouteMapCategory! @connection
   owner: Seeker! @connection(name: "SeekerRouteMaps")
@@ -223,9 +223,9 @@ type Post @model(subscriptions: null) @aws_cognito_user_pools {
   status: Int!
   visibility: Int!
   blog: BlogPost
-  photo: [S3Object]
-  video: S3Object
-  videoThumbnail: S3Object
+  photo: [String]
+  video: String
+  videoThumbnail: String
   milestone: MilestonePost
   createdAt: String!
   routeMap: RouteMap @connection(name: "RouteMapPosts")
@@ -335,7 +335,7 @@ type Content
   positiveFeedbacks: [ContentPositiveFeedback]
     @connection(keyName: "byContentId", fields: ["id"])
   blog: BlogPost
-  photo: S3Object
+  photo: String
   video: String
   status: Int!
   opportunityProviderId: ID!
@@ -364,7 +364,7 @@ type BlogPost @aws_cognito_user_pools {
   blogTitle: String!
   blogDescription: String!
   blogBody: String
-  blogCoverPhoto: S3Object
+  blogCoverPhoto: String
   visibility: String!
 }
 
@@ -416,8 +416,8 @@ type Collaboration @model(subscriptions: null) @aws_cognito_user_pools {
   caption: String
   capacity: Int!
   status: Int!
-  cover: S3Object
-  coverThumb: S3Object
+  cover: String
+  coverThumb: String
   inviteOnly: Boolean!
   owner: Seeker! @connection(name: "SeekerCollaborations")
   members: [CollaborationMember]
