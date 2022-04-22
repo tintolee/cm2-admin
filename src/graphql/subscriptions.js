@@ -22,11 +22,7 @@ export const onCreateMessageByConversationId = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -112,11 +108,7 @@ export const onCreateConversationMemberBySeekerId = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -178,11 +170,7 @@ export const onCreateMessage = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -257,11 +245,7 @@ export const onUpdateMessage = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -336,11 +320,7 @@ export const onDeleteMessage = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }

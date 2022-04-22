@@ -12,11 +12,7 @@ export const bringOpportunity = /* GraphQL */ `
       caption
       capacity
       status
-      cover {
-        bucket
-        region
-        key
-      }
+      cover
       applicationRequired
       applicationDeadline
       opportunityType {
@@ -50,6 +46,7 @@ export const bringOpportunity = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -70,11 +67,7 @@ export const bringOpportunity = /* GraphQL */ `
         email
         educationalInstitution
         status
-        logo {
-          bucket
-          region
-          key
-        }
+        logo
         tagline
         address
         phone
@@ -149,11 +142,7 @@ export const getOpportunityProvider = /* GraphQL */ `
       email
       educationalInstitution
       status
-      logo {
-        bucket
-        region
-        key
-      }
+      logo
       tagline
       address
       phone
@@ -197,6 +186,7 @@ export const getOpportunityProvider = /* GraphQL */ `
           caption
           description
           type
+          photo
           video
           status
           opportunityProviderId
@@ -216,6 +206,7 @@ export const getOpportunityProvider = /* GraphQL */ `
           caption
           capacity
           status
+          cover
           applicationRequired
           applicationDeadline
           opportunityOpportunityProviderId
@@ -272,11 +263,7 @@ export const listOpportunityProviders = /* GraphQL */ `
         email
         educationalInstitution
         status
-        logo {
-          bucket
-          region
-          key
-        }
+        logo
         tagline
         address
         phone
@@ -330,11 +317,7 @@ export const getOpportunityProviderFollower = /* GraphQL */ `
         email
         educationalInstitution
         status
-        logo {
-          bucket
-          region
-          key
-        }
+        logo
         tagline
         address
         phone
@@ -378,11 +361,7 @@ export const getOpportunityProviderFollower = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -449,6 +428,7 @@ export const listOpportunityProviderFollowers = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -467,6 +447,7 @@ export const listOpportunityProviderFollowers = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -545,11 +526,7 @@ export const getOpportunityProviderUser = /* GraphQL */ `
         email
         educationalInstitution
         status
-        logo {
-          bucket
-          region
-          key
-        }
+        logo
         tagline
         address
         phone
@@ -614,6 +591,7 @@ export const listOpportunityProviderUsers = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -640,11 +618,7 @@ export const getOpportunity = /* GraphQL */ `
       caption
       capacity
       status
-      cover {
-        bucket
-        region
-        key
-      }
+      cover
       applicationRequired
       applicationDeadline
       opportunityType {
@@ -678,6 +652,7 @@ export const getOpportunity = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -698,11 +673,7 @@ export const getOpportunity = /* GraphQL */ `
         email
         educationalInstitution
         status
-        logo {
-          bucket
-          region
-          key
-        }
+        logo
         tagline
         address
         phone
@@ -782,11 +753,7 @@ export const listOpportunitys = /* GraphQL */ `
         caption
         capacity
         status
-        cover {
-          bucket
-          region
-          key
-        }
+        cover
         applicationRequired
         applicationDeadline
         opportunityType {
@@ -818,6 +785,7 @@ export const listOpportunitys = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -885,11 +853,7 @@ export const getOpportunityStep = /* GraphQL */ `
         caption
         capacity
         status
-        cover {
-          bucket
-          region
-          key
-        }
+        cover
         applicationRequired
         applicationDeadline
         opportunityType {
@@ -921,6 +885,7 @@ export const getOpportunityStep = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -950,11 +915,7 @@ export const getOpportunityStep = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -1017,6 +978,7 @@ export const listOpportunitySteps = /* GraphQL */ `
           caption
           capacity
           status
+          cover
           applicationRequired
           applicationDeadline
           opportunityOpportunityProviderId
@@ -1035,6 +997,7 @@ export const listOpportunitySteps = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -1063,16 +1026,13 @@ export const getSeeker = /* GraphQL */ `
       postcodeArea
       dateOfBirth
       biography
-      profilePic {
-        bucket
-        region
-        key
-      }
+      profilePic
       routeMaps {
         items {
           id
           visibility
           status
+          coverPhoto
           destination
           focusAreas
           createdAt
@@ -1111,6 +1071,9 @@ export const getSeeker = /* GraphQL */ `
           caption
           status
           visibility
+          photo
+          video
+          videoThumbnail
           createdAt
           updatedAt
         }
@@ -1154,6 +1117,8 @@ export const getSeeker = /* GraphQL */ `
           caption
           capacity
           status
+          cover
+          coverThumb
           inviteOnly
           createdAt
           updatedAt
@@ -1207,11 +1172,7 @@ export const listSeekers = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -1257,11 +1218,7 @@ export const getRouteMap = /* GraphQL */ `
       id
       visibility
       status
-      coverPhoto {
-        bucket
-        region
-        key
-      }
+      coverPhoto
       destination
       category {
         id
@@ -1283,11 +1240,7 @@ export const getRouteMap = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -1331,6 +1284,9 @@ export const getRouteMap = /* GraphQL */ `
           caption
           status
           visibility
+          photo
+          video
+          videoThumbnail
           createdAt
           updatedAt
         }
@@ -1352,11 +1308,7 @@ export const listRouteMaps = /* GraphQL */ `
         id
         visibility
         status
-        coverPhoto {
-          bucket
-          region
-          key
-        }
+        coverPhoto
         destination
         category {
           id
@@ -1378,6 +1330,7 @@ export const listRouteMaps = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -1479,28 +1432,12 @@ export const getPost = /* GraphQL */ `
         blogTitle
         blogDescription
         blogBody
-        blogCoverPhoto {
-          bucket
-          region
-          key
-        }
+        blogCoverPhoto
         visibility
       }
-      photo {
-        bucket
-        region
-        key
-      }
-      video {
-        bucket
-        region
-        key
-      }
-      videoThumbnail {
-        bucket
-        region
-        key
-      }
+      photo
+      video
+      videoThumbnail
       milestone {
         title
         date
@@ -1510,11 +1447,7 @@ export const getPost = /* GraphQL */ `
         id
         visibility
         status
-        coverPhoto {
-          bucket
-          region
-          key
-        }
+        coverPhoto
         destination
         category {
           id
@@ -1536,6 +1469,7 @@ export const getPost = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -1560,11 +1494,7 @@ export const getPost = /* GraphQL */ `
         caption
         capacity
         status
-        cover {
-          bucket
-          region
-          key
-        }
+        cover
         applicationRequired
         applicationDeadline
         opportunityType {
@@ -1596,6 +1526,7 @@ export const getPost = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -1623,6 +1554,9 @@ export const getPost = /* GraphQL */ `
           caption
           status
           visibility
+          photo
+          video
+          videoThumbnail
           createdAt
           updatedAt
         }
@@ -1640,11 +1574,7 @@ export const getPost = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -1714,23 +1644,12 @@ export const listPosts = /* GraphQL */ `
           blogTitle
           blogDescription
           blogBody
+          blogCoverPhoto
           visibility
         }
-        photo {
-          bucket
-          region
-          key
-        }
-        video {
-          bucket
-          region
-          key
-        }
-        videoThumbnail {
-          bucket
-          region
-          key
-        }
+        photo
+        video
+        videoThumbnail
         milestone {
           title
           date
@@ -1740,6 +1659,7 @@ export const listPosts = /* GraphQL */ `
           id
           visibility
           status
+          coverPhoto
           destination
           focusAreas
           createdAt
@@ -1754,6 +1674,7 @@ export const listPosts = /* GraphQL */ `
           caption
           capacity
           status
+          cover
           applicationRequired
           applicationDeadline
           opportunityOpportunityProviderId
@@ -1778,6 +1699,7 @@ export const listPosts = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -1811,23 +1733,12 @@ export const getPostTag = /* GraphQL */ `
           blogTitle
           blogDescription
           blogBody
+          blogCoverPhoto
           visibility
         }
-        photo {
-          bucket
-          region
-          key
-        }
-        video {
-          bucket
-          region
-          key
-        }
-        videoThumbnail {
-          bucket
-          region
-          key
-        }
+        photo
+        video
+        videoThumbnail
         milestone {
           title
           date
@@ -1837,6 +1748,7 @@ export const getPostTag = /* GraphQL */ `
           id
           visibility
           status
+          coverPhoto
           destination
           focusAreas
           createdAt
@@ -1851,6 +1763,7 @@ export const getPostTag = /* GraphQL */ `
           caption
           capacity
           status
+          cover
           applicationRequired
           applicationDeadline
           opportunityOpportunityProviderId
@@ -1875,6 +1788,7 @@ export const getPostTag = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -1910,6 +1824,9 @@ export const listPostTags = /* GraphQL */ `
           caption
           status
           visibility
+          photo
+          video
+          videoThumbnail
           createdAt
           updatedAt
         }
@@ -2029,6 +1946,7 @@ export const getSpecialProject = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -2049,11 +1967,7 @@ export const getSpecialProject = /* GraphQL */ `
         email
         educationalInstitution
         status
-        logo {
-          bucket
-          region
-          key
-        }
+        logo
         tagline
         address
         phone
@@ -2136,6 +2050,7 @@ export const listSpecialProjects = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -2173,18 +2088,10 @@ export const getContent = /* GraphQL */ `
         blogTitle
         blogDescription
         blogBody
-        blogCoverPhoto {
-          bucket
-          region
-          key
-        }
+        blogCoverPhoto
         visibility
       }
-      photo {
-        bucket
-        region
-        key
-      }
+      photo
       video
       status
       opportunityProviderId
@@ -2204,6 +2111,7 @@ export const getContent = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -2224,11 +2132,7 @@ export const getContent = /* GraphQL */ `
         email
         educationalInstitution
         status
-        logo {
-          bucket
-          region
-          key
-        }
+        logo
         tagline
         address
         phone
@@ -2299,13 +2203,10 @@ export const listContents = /* GraphQL */ `
           blogTitle
           blogDescription
           blogBody
+          blogCoverPhoto
           visibility
         }
-        photo {
-          bucket
-          region
-          key
-        }
+        photo
         video
         status
         opportunityProviderId
@@ -2329,6 +2230,7 @@ export const listContents = /* GraphQL */ `
           email
           educationalInstitution
           status
+          logo
           tagline
           address
           phone
@@ -2364,11 +2266,7 @@ export const getFriendshipRequest = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -2415,11 +2313,7 @@ export const getFriendshipRequest = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -2487,6 +2381,7 @@ export const listFriendshipRequests = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -2506,6 +2401,7 @@ export const listFriendshipRequests = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -2564,16 +2460,8 @@ export const getCollaboration = /* GraphQL */ `
       caption
       capacity
       status
-      cover {
-        bucket
-        region
-        key
-      }
-      coverThumb {
-        bucket
-        region
-        key
-      }
+      cover
+      coverThumb
       inviteOnly
       owner {
         id
@@ -2586,11 +2474,7 @@ export const getCollaboration = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -2673,16 +2557,8 @@ export const listCollaborations = /* GraphQL */ `
         caption
         capacity
         status
-        cover {
-          bucket
-          region
-          key
-        }
-        coverThumb {
-          bucket
-          region
-          key
-        }
+        cover
+        coverThumb
         inviteOnly
         owner {
           id
@@ -2695,6 +2571,7 @@ export const listCollaborations = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -2737,11 +2614,7 @@ export const getMessage = /* GraphQL */ `
         postcodeArea
         dateOfBirth
         biography
-        profilePic {
-          bucket
-          region
-          key
-        }
+        profilePic
         routeMaps {
           nextToken
         }
@@ -2821,6 +2694,7 @@ export const listMessages = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted
@@ -2940,6 +2814,7 @@ export const messagesByConversationId = /* GraphQL */ `
           postcodeArea
           dateOfBirth
           biography
+          profilePic
           interests
           admireBrands
           profileCompleted

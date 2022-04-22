@@ -320,7 +320,7 @@ type SpecialProject @model(subscriptions: null) @aws_cognito_user_pools {
 type S3Object @aws_cognito_user_pools {
   bucket: String!
   region: String!
-  key: String!
+  key: String!    
 }
 
 type Content

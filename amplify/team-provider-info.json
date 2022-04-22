@@ -126,5 +126,31 @@
         "cm2adminac2a1346": {}
       }
     }
+  },
+  "pryme": {
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      }
+    },
+    "awscloudformation": {}
+  },
+  "joseph": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cm2admin-joseph-165746-authRole",
+      "UnauthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-joseph-165746-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::712691200111:role/amplify-cm2admin-joseph-165746-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-cm2admin-joseph-165746-deployment",
+      "UnauthRoleName": "amplify-cm2admin-joseph-165746-unauthRole",
+      "StackName": "amplify-cm2admin-joseph-165746",
+      "StackId": "arn:aws:cloudformation:eu-west-1:712691200111:stack/amplify-cm2admin-joseph-165746/f8af1d30-c254-11ec-bd5c-022fab370d2d",
+      "AmplifyAppId": "d1x7vqge542292"
+    },
+    "categories": {
+      "auth": {
+        "cm2adminac2a1346": {}
+      }
+    }
   }
 }
