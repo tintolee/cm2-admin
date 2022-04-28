@@ -317,12 +317,6 @@ type SpecialProject @model(subscriptions: null) @aws_cognito_user_pools {
     @connection(fields: ["opportunityProviderId"])
 }
 
-type S3Object @aws_cognito_user_pools {
-  bucket: String!
-  region: String!
-  key: String!    
-}
-
 type Content
   @model(subscriptions: null)
   @key(name: "byProvider", fields: ["opportunityProviderId"])
